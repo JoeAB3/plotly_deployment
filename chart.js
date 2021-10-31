@@ -49,9 +49,6 @@ function buildMetadata(sample) {
   });
 }
 
-//######################################################################################
-//############################ Dev. 1: Bar Graph #######################################
-//######################################################################################
 // 1. Create the buildCharts function.
 function buildCharts(sample) {
   // 2. Use d3.json to load and retrieve the samples.json file 
@@ -95,67 +92,5 @@ function buildCharts(sample) {
     };
     // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot("bar", barData, barLayout); 
-
-//############################################################################################
-//############################ Dev. 2: Bar and Bubble Charts #################################
-//############################################################################################
-    // 1. Create the trace for the bubble chart.
-    var bubbleData = [
-      {
-        x: otu_ids,
-        y: sample_values,
-        text: otu_labels,
-        mode: "markers",
-        marker: {
-          size: sample_values,
-          color: otu_ids,
-          colorscale: "Navy"
-        }
-      }
-    ];
-    // 2. Create the layout for the bubble chart.
-    var bubbleLayout = {
-      title: "Bacteria Cultures Per Sample",
-      margin: { t: 0 },
-      hovermode: "closest",
-      xaxis: { title: "OTU ID" },
-      margin: { t: 30} 
-    };  
-    // 3. Use Plotly to plot the data with the layout.
-    Plotly.newPlot("bubble", bubbleData, bubbleLayout);
-
-//############################################################################################
-//################################ Dev. 3: Gauge Chart #######################################
-//############################################################################################
-    // 4. Create the trace for the gauge chart.
-    var gaugeData = [{
-      domain: { x: [0, 1], y: [0, 1] },
-      value: washing_frequency,
-      type: "indicator",
-      mode: "gauge+number",
-      title: { text: "<b> Belly Button Washing Frequency</b> <br> # of Scrubs per Week" },
-      gauge: {
-        axis: { range: [null, 10], tickwidth: 2, tickcolor: "black" },
-        bar: { color: "black" },
-        steps: [
-          { range: [0, 2], color: "firebrick" },
-          { range: [2, 4], color: "darkorange" },
-          { range: [4, 6], color: "greenyellow" },
-          { range: [6, 8], color: "lightseagreen" },
-          { range: [8, 10], color: "dodgerblue" }
-        ],
-        threshold: {
-          value: washing_frequency,
-        }
-      },
-      
-    }];
-    // 5. Create the layout for the gauge chart.
-    var gaugeLayout = { 
-      width: 600, height: 500, margin: { t: 0, b: 0 },
-      font: { color: "black"}
-    };
-    // 6. Use Plotly to plot the gauge data and layout.
-    Plotly.newPlot("gauge", gaugeData, gaugeLayout);
   });
 }
